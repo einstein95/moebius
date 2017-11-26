@@ -1169,7 +1169,7 @@ pref("dom.require_user_interaction_for_beforeunload", true);
 
 pref("dom.disable_open_during_load",                false);
 pref("dom.popup_maximum",                           20);
-pref("dom.popup_allowed_events", "change click dblclick mouseup notificationclick reset submit touchend");
+pref("dom.popup_allowed_events", "change click dblclick mouseup pointerup notificationclick reset submit touchend");
 pref("dom.disable_open_click_delay", 1000);
 
 pref("dom.storage.enabled", true);
@@ -1577,7 +1577,7 @@ pref("network.http.bypass-cachelock-threshold", 250);
 pref("network.http.spdy.enabled", true);
 pref("network.http.spdy.enabled.http2", true);
 pref("network.http.spdy.enabled.deps", true);
-pref("network.http.spdy.enforce-tls-profile", true);
+pref("network.http.spdy.enforce-tls-profile", false);
 pref("network.http.spdy.chunk-size", 16000);
 pref("network.http.spdy.timeout", 180);
 pref("network.http.spdy.coalesce-hostnames", true);
@@ -2214,7 +2214,7 @@ pref("extensions.blocklist.interval", 86400);
 // Required blocklist freshness for OneCRL OCSP bypass
 // (default is 1.25x extensions.blocklist.interval, or 30 hours)
 pref("security.onecrl.maximum_staleness_in_seconds", 108000);
-pref("extensions.blocklist.url", "https://blocklist.addons.mozilla.org/blocklist/3/%APP_ID%/%APP_VERSION%/%PRODUCT%/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/%DISTRIBUTION%/%DISTRIBUTION_VERSION%/%PING_COUNT%/%TOTAL_PING_COUNT%/%DAYS_SINCE_LAST_PING%/");
+pref("extensions.blocklist.url", "https://blocklist.basilisk-browser.org/blocklist/%APP_ID%/%APP_VERSION%/%PRODUCT%/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/");
 pref("extensions.blocklist.detailsURL", "https://www.mozilla.com/%LOCALE%/blocklist/");
 pref("extensions.blocklist.itemURL", "https://blocklist.addons.mozilla.org/%LOCALE%/%APP%/blocked/%blockID%");
 // Controls what level the blocklist switches from warning about items to forcibly
@@ -5396,7 +5396,7 @@ pref("browser.search.official", true);
 //pref("media.gmp-manager.url.override", "");
 
 // Update service URL for GMP install/updates:
-pref("media.gmp-manager.url", "https://aus5.mozilla.org/update/3/GMP/%VERSION%/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/%DISTRIBUTION%/%DISTRIBUTION_VERSION%/update.xml");
+pref("media.gmp-manager.url", "https://aus5.mozilla.org/update/3/GMP/55.0/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/%DISTRIBUTION%/%DISTRIBUTION_VERSION%/update.xml");
 
 // When |media.gmp-manager.cert.requireBuiltIn| is true or not specified the
 // final certificate and all certificates the connection is redirected to before

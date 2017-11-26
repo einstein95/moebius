@@ -155,7 +155,7 @@ pref("app.update.service.enabled", true);
 //  .. etc ..
 //
 pref("extensions.update.enabled", true);
-pref("extensions.update.url", "https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID=%APP_ID%&appVersion=%APP_VERSION%&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=%CURRENT_APP_VERSION%&updateType=%UPDATE_TYPE%&compatMode=%COMPATIBILITY_MODE%");
+pref("extensions.update.url", "https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID=%APP_ID%&appVersion=53.0&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=%CURRENT_APP_VERSION%&updateType=%UPDATE_TYPE%&compatMode=%COMPATIBILITY_MODE%");
 pref("extensions.update.background.url", "https://versioncheck-bg.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID=%APP_ID%&appVersion=%APP_VERSION%&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=%CURRENT_APP_VERSION%&updateType=%UPDATE_TYPE%&compatMode=%COMPATIBILITY_MODE%");
 pref("extensions.update.interval", 86400);  // Check for updates to Extensions and
                                             // Themes every day
@@ -172,7 +172,11 @@ pref("lightweightThemes.getMoreURL", "https://addons.mozilla.org/%LOCALE%/firefo
 pref("lightweightThemes.recommendedThemes", "");
 
 // Enable the UI for Encrypted Media Extensions (EME)
+#if defined(MOZ_WIDEVINE_EME)
 pref("browser.eme.ui.enabled", true);
+#else
+pref("browser.eme.ui.enabled", false);
+#endif
 
 // UI tour experience.
 pref("browser.uitour.enabled", false);
@@ -1363,7 +1367,11 @@ pref("ui.key.menuAccessKeyFocuses", true);
 // prompted to enable DRM, whereupon the EME plugin binaries will be
 // downloaded if permission is granted.
 pref("media.eme.enabled", false);
+#ifdef MOZ_EME
 pref("media.eme.apiVisible", true);
+#else
+pref("media.eme.apiVisible", false);
+#endif
 
 // Whether we should run a test-pattern through EME GMPs before assuming they'll
 // decode H.264.
@@ -1376,8 +1384,11 @@ pref("media.gmp.trial-create.enabled", true);
 // and script requests EME. If *.visible is false, we won't show the UI
 // to enable the CDM if its disabled; it's as if the keysystem is completely
 // unsupported.
+
+#ifdef MOZ_WIDEVINE_EME
 pref("media.gmp-widevinecdm.visible", true);
-pref("media.gmp-widevinecdm.enabled", false);
+pref("media.gmp-widevinecdm.enabled", true);
+#endif
 
 // Play with different values of the decay time and get telemetry,
 // 0 means to randomize (and persist) the experiment value in users' profiles,
