@@ -2241,7 +2241,8 @@ pref("services.blocklist.gfx.checked", 0);
 pref("services.blocklist.signing.enforced", true);
 
 // Enable blocklists via the services settings mechanism
-pref("services.blocklist.update_enabled", true);
+// This requires a Kinto server.
+pref("services.blocklist.update_enabled", false);
 
 // Enable certificate blocklist updates via services settings
 pref("security.onecrl.via.amo", false);
@@ -2279,11 +2280,12 @@ pref("clipboard.autocopy", false);
 pref("clipboard.plainTextOnly", false);
 
 #ifdef XP_WIN
-// Setting false you can disable 4th button and/or 5th button of your mouse.
-// 4th button is typically mapped to "Back" and 5th button is typically mapped
-// to "Forward" button.
-pref("mousebutton.4th.enabled", true);
-pref("mousebutton.5th.enabled", true);
+// Mouse 4th/5th button handling
+// Setting these to false allows you to disable the 4th and/or 5th button of
+// your mouse. The 4th button is typically mapped to "Back" and the 5th
+// button is typically mapped to "Forward".
+pref("mouse.button4.enabled", true);
+pref("mouse.button5.enabled", true);
 #endif
 
 // mouse wheel scroll transaction period of time (in milliseconds)
@@ -2778,8 +2780,8 @@ pref("editor.resizing.preserve_ratio",       true);
 pref("editor.positioning.offset",            0);
 
 pref("dom.use_watchdog", true);
-pref("dom.max_chrome_script_run_time", 20);
-pref("dom.max_script_run_time", 10);
+pref("dom.max_chrome_script_run_time", 90);
+pref("dom.max_script_run_time", 20);
 
 // Stop all scripts in a compartment when the "stop script" dialog is used.
 pref("dom.global_stop_script", true);
@@ -4999,18 +5001,6 @@ pref("memory.dump_reports_on_oom", false);
 // Number of stack frames to capture in createObjectURL for about:memory.
 pref("memory.blob_report.stack_frames", 0);
 
-// comma separated list of domain origins (e.g. https://domain.com) that still
-// need localStorage in the frameworker
-pref("social.whitelist", "https://mozsocial.cliqz.com");
-// comma separated list of domain origins (e.g. https://domain.com) for
-// directory websites (e.g. AMO) that can install providers for other sites
-pref("social.directories", "https://activations.cdn.mozilla.net");
-// remote-install allows any website to activate a provider, with extended UI
-// notifying user of installation. we can later pref off remote install if
-// necessary. This does not affect whitelisted and directory installs.
-pref("social.remote-install.enabled", true);
-pref("social.toast-notifications.enabled", true);
-
 // Disable idle observer fuzz, because only privileged content can access idle
 // observers (bug 780507).
 pref("dom.idle-observers-api.fuzz_time.disabled", true);
@@ -5606,6 +5596,12 @@ pref ("security.mixed_content.hsts_priming_cache_timeout", 10080);
 // Force the channel to timeout in 3 seconds if we have not received
 // expects a time in milliseconds
 pref ("security.mixed_content.hsts_priming_request_timeout", 3000);
+
+// TODO: Bug 1380959: Block toplevel data: URI navigations
+// If true, all toplevel data: URI navigations will be blocked.
+// Please note that manually entering a data: URI in the
+// URL-Bar will not be blocked when flipping this pref.
+pref("security.data_uri.block_toplevel_data_uri_navigations", false);
 
 // Disable Storage api in release builds.
 #ifdef NIGHTLY_BUILD

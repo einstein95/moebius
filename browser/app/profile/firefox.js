@@ -54,7 +54,7 @@ pref("extensions.getAddons.themes.browseURL", "https://addons.mozilla.org/%LOCAL
 pref("extensions.update.autoUpdateDefault", true);
 
 // Check AUS for system add-on updates.
-pref("extensions.systemAddon.update.url", "https://aus5.mozilla.org/update/3/SystemAddons/%VERSION%/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/%DISTRIBUTION%/%DISTRIBUTION_VERSION%/update.xml");
+pref("extensions.systemAddon.update.url", "http://localhost/dummy-system-addons.xml");
 
 // Disable add-ons that are not installed by the user in all scopes by default.
 // See the SCOPE constants in AddonManager.jsm for values to use here.
@@ -910,12 +910,7 @@ pref("app.support.baseURL", "https://support.mozilla.org/1/firefox/%VERSION%/%OS
 pref("app.support.e10sAccessibilityUrl", "https://support.mozilla.org/1/firefox/%VERSION%/%OS%/%LOCALE%/accessibility-ppt");
 
 // base url for web-based feedback pages
-#ifdef MOZ_DEV_EDITION
-pref("app.feedback.baseURL", "");
-#else
-pref("app.feedback.baseURL", "");
-#endif
-
+pref("app.feedback.baseURL", "https://forum.palemoon.org/viewforum.php?f=61");
 
 // Name of alternate about: page for certificate errors (when undefined, defaults to about:neterror)
 pref("security.alternate_certificate_error_page", "certerror");
@@ -1241,13 +1236,6 @@ pref("pdfjs.previousHandler.alwaysAskBeforeHandling", false);
 // (This is intentionally on the high side; see bug 746055.)
 pref("image.mem.max_decoded_image_kb", 256000);
 
-pref("social.sidebar.unload_timeout_ms", 10000);
-
-// Activation from inside of share panel is possible if activationPanelEnabled
-// is true. Pref'd off for release while usage testing is done through beta.
-pref("social.share.activationPanelEnabled", true);
-pref("social.shareDirectory", "https://activations.cdn.mozilla.net/sharePanel.html");
-
 // Block insecure active content on https pages
 pref("security.mixed_content.block_active_content", true);
 
@@ -1358,18 +1346,19 @@ pref("identity.fxaccounts.migrateToDevEdition", false);
 pref("ui.key.menuAccessKeyFocuses", true);
 #endif
 
+#ifdef MOZ_EME
 // Encrypted media extensions.
 // EME is visible but disabled by default. This is so that the
-// "Play DRM content" checkbox in the Firefox UI is unchecked by default.
+// "Play DRM content" checkbox in the browser UI is unchecked by default.
 // DRM requires downloading and installing proprietary binaries, which
 // users didn't necessarily opt-in to by installing the browser.
 // The first time a site using EME is encountered, the user will be
 // prompted to enable DRM, whereupon the EME plugin binaries will be
 // downloaded if permission is granted.
 pref("media.eme.enabled", false);
-#ifdef MOZ_EME
 pref("media.eme.apiVisible", true);
 #else
+// Disable redundant interfaces
 pref("media.eme.apiVisible", false);
 #endif
 
